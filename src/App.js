@@ -1,16 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
+import {NavBar} from './components/NavBar/NavBar.js';
 
 function App() {
-    return ( <
-        div className = "App" >
-        <
-        header className = "App-header" >
-        <
-        h1 > STREET WEAR < /h1> <
-        /header> <
-        /div>
-    );
+  return (
+
+        <NavBar/>
+
+  );
 }
 
 export default App;
