@@ -1,5 +1,6 @@
 import React from 'react';
-import Logo from '../../img/streetwear-logo.png'
+import Logo from '../../img/streetwear-logo.png';
+import { CartWidget } from '../CartWidget/CartWidget.js';
 
 export const NavBar = () => {
     return ( <
@@ -18,12 +19,12 @@ export const NavBar = () => {
         /a> <
         div className = "navbar-nav" >
         <
-        a className = "nav-link"
+        a className = "nav-link pt-3"
         href = "#" > PRODUCTOS < /a> <
-        a className = "nav-link"
+        a className = "nav-link pt-3"
         href = "#" > SALE < /a> <
-        a className = "nav-link"
-        href = "#" > CARRITO < /a> <
+        CartWidget width = "40" / >
+        <
         /div> <
         /div> <
         /nav>
