@@ -1,0 +1,17 @@
+.text__center {
+    text-align: center;
+}
+
+.item__card {
+    transition: all 400ms ease;
+}
+
+.item__card:hover {
+    transition: all 400ms ease;
+    transform: scale(105%);
+}
+
+.item__price {
+    font-size: 25px;
+    font-weight: 700;
+}
