@@ -1,14 +1,22 @@
 import './App.css';
-import {NavBar} from './components/NavBar/NavBar.js';
-import {ItemListContainer} from './components/ItemListContainer/ItemListContainer.js';
-// import {ItemCount} from './components/ItemCount/ItemCount.js';
+import { BrowserRouter, Routes, Route, Link, useParams } from "react-router-dom";
+import {NavBar} from './components/NavBar/NavBar.jsx';
+import ItemListContainer from './components/ItemListContainer/ItemListContainer';
+import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
+
 
 function App() {
+
   return (
     <>
-        <NavBar/>
-        <ItemListContainer/>
-        {/* <ItemCount stock="10" initial="1"/> */}
+        <BrowserRouter>
+          <NavBar/>
+          <Routes>
+              <Route path="/" element={<ItemListContainer/>}/>
+              <Route path="/category/:id" element={<ItemListContainer/>}/>
+              <Route path="/item/:id" element={<ItemDetailContainer/>}/>
+          </Routes>
+        </BrowserRouter>
     </>
   );
 }

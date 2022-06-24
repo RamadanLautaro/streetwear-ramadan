@@ -1,0 +1,8 @@
+.item__detail__aside{
+    background-color: rgb(196, 209, 255);
+}
+
+.item__detail__price {
+    font-size: 50px;
+    font-weight: 700;
+}

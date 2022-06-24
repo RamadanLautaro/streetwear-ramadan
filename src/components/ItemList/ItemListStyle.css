@@ -1,11 +1,3 @@
 .text__center {
     text-align: center;
 }
-
-.mostrar {
-    display: block;
-}
-
-.ocultar {
-    display: none;
-}

@@ -1,8 +1,10 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route, Link, useParams } from "react-router-dom";
 import "./ItemStyle.css";
 
-export const Item = (props) => {
-    const {title, description, price, pictureUrl} = props;
+
+function Item ({id, title, description, price, pictureUrl}) {
+
 
 	return (
 		<>
@@ -19,7 +21,7 @@ export const Item = (props) => {
                                 <span className="text-primary item__price">${price}</span>
                             </div>
                             <div className="col-6">
-                                <a className="btn btn-primary w-100">COMPRAR</a>
+                                <Link to={`/item/${id}`} className="btn btn-primary w-100">VER PRODUCTO</Link>
                             </div>
                         </div>
                     </div>
@@ -28,3 +30,5 @@ export const Item = (props) => {
 		</>
 	);
 };
+
+export default Item;
