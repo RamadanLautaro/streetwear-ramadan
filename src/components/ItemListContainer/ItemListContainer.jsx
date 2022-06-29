@@ -11,11 +11,10 @@ function ItemListContainer () {
     const {id} = useParams();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [filter, setFilter] = useState("all");
 
     useEffect(() => {
 
-        productsFetch(1000, productsList, id)
+        productsFetch(0, productsList, id)
         .then((productsObt) => {
             
             setProducts(productsObt)
@@ -26,8 +25,8 @@ function ItemListContainer () {
             
             setTimeout(() => {
                 setLoading(false)
-            }, 1000)
-
+            }, 0)
+            
         )
     }, [id])
 

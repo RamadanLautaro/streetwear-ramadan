@@ -11,20 +11,16 @@ function ItemDetailContainer () {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-
         productsFetch(0, productsList)
-        .then((productsObt) => {setProducts(productsObt.filter(producto => producto.id === parseInt(id)))})
+        .then((productsObt) => {setProducts(productsObt.find(producto => producto.id === parseInt(id)))})
     }, [])
-
 
 
     return (
     <>
-        {products.map((product) => (
-            <ItemDetail key={product.id} {...product} />
-        ))}
+        <ItemDetail {...products} />
     </>
     )
-} 
+}
 
 export default ItemDetailContainer;
