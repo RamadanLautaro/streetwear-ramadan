@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import "./ItemCountStyle.css";
 
-function ItemCount ({stock, initial, unidades, changeUnidades}) {
+function ItemCount ({stock, initial, changeUnidades}) {
+    
     const [count, setCount] = useState(parseInt(initial));
 
 	const changeCount = (op) => {
@@ -9,11 +10,14 @@ function ItemCount ({stock, initial, unidades, changeUnidades}) {
 
         if (action == "agregar" && count != stock) {
             setCount(count + 1);
+            changeUnidades(count + 1);
         }
         else if(action == "quitar" && count != 1) {
             setCount(count - 1);
+            changeUnidades(count - 1);
         }
 	};
+
 
     return (
         <>
@@ -23,12 +27,10 @@ function ItemCount ({stock, initial, unidades, changeUnidades}) {
                         {<h1>{count}</h1>}
                     </div> */}
                     <div className="col-6">
-                        {/* <button className="btn btn-secondary w-100 fw-bolder" onClick={(e) => changeCount("quitar")}>-</button> */}
-                        <button className="btn btn-secondary w-100 fw-bolder" onClick={() => changeUnidades(unidades - 1)}>-</button>
+                        <button className="btn btn-secondary w-100 fw-bolder" onClick={(e) => changeCount("quitar")}>-</button>
                     </div>
                     <div className="col-6">
-                        {/* <button className="btn btn-primary w-100 fw-bolder" onClick={(e) => changeCount("agregar")}>+</button> */}
-                        <button className="btn btn-primary w-100 fw-bolder" onClick={() => changeUnidades(unidades + 1)}>+</button>
+                        <button className="btn btn-primary w-100 fw-bolder" onClick={(e) => changeCount("agregar")}>+</button>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,13 @@
+.cartItem__picture {
+    width: 100%;
+}
+
+.cartItem__quantity {
+    font-size: 50px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.cartItem__button {
+    float: right;
+}
