@@ -5,15 +5,15 @@ import { CartWidget } from '../CartWidget/CartWidget.js';
 export const NavBar = () => {
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark" bg="dark" variant="dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark pb-2" bg="dark" variant="dark">
             <div className="container-fluid">
-                    <Link to="/" className="navbar-brand">
-                        <img src='/img/streetwear-logo.png' width={200}/>
-                    </Link>
+                <Link to="/" className="navbar-brand">
+                    <img src='/img/streetwear-logo.png' width={200}/>
+                </Link>
                 <div className="navbar-nav">
-                    <Link to="/category/camperas" className="nav-link pt-3">CAMPERAS</Link>
-                    <Link to="/category/camisas" className="nav-link pt-3">CAMISAS</Link>
-                    <Link to="/category/buzos" className="nav-link pt-3">BUZOS</Link>
+                    <Link to="/category/camperas" className="nav-link pt-3 pb-3">CAMPERAS</Link>
+                    <Link to="/category/camisas" className="nav-link pt-3 pb-3">CAMISAS</Link>
+                    <Link to="/category/buzos" className="nav-link pt-3 pb-3">BUZOS</Link>
                     <CartWidget width="40"/>
                 </div>
             </div>

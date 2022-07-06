@@ -5,3 +5,21 @@
 .cart__gif {
     border-radius: 50%;
 }
+
+.cart__details {
+    text-align: center;
+}
+
+.cart__totalQuantity {
+    color: white;
+    font-size: 25px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.cart__totalPrice {
+    color: white;
+    font-size: 25px;
+    font-weight: bolder;
+    text-align: center;
+}

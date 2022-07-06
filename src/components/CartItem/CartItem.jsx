@@ -3,7 +3,7 @@ import { CartContext } from '../CartContext/CartContext';
 import './CartItemStyle.css';
 
 
-function CartItem ({id, title, description, price, pictureUrl, quantity}) {
+function CartItem ({id, title, description, price, pictureUrl, quantity, subtotalPrice}) {
 
     const {removeItem} = useContext(CartContext);
 
@@ -21,7 +21,7 @@ function CartItem ({id, title, description, price, pictureUrl, quantity}) {
                 </div>
                 <div className="col-8">
                     <h2 className="card-title">{title}</h2>
-                    <span className="text-primary item__price">${price}</span>
+                    <span className="text-primary item__price">${price} (SUBTOTAL: ${subtotalPrice})</span>
                 </div>
                 <div className="col-2">
                     <div className="text-primary cartItem__quantity">{quantity}</div>

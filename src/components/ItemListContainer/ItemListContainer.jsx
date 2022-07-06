@@ -33,7 +33,7 @@ function ItemListContainer () {
 
     return (
         <>
-            <div className="row mt-5 mb-5 justify-content-center">
+            <div className="row m-0 mt-5 mb-5 justify-content-center">
                 <div className="col-10">
                     <div className="row">
                         <ItemList products={products}/>

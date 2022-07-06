@@ -1,0 +1,16 @@
+.cart__widget{
+    position: relative;
+}
+.cart__number{
+    position: absolute;
+    bottom: 60%;
+    left: 60%;
+    color: white;
+    background-color: deeppink;
+    font-weight: bolder;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    line-height: 24px;
+    text-align: center;
+}
