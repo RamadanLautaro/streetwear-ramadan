@@ -1,24 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import {collection, doc, getDocs, getDoc, getFirestore} from "firebase/firestore";
 import { BrowserRouter, Routes, Route, Link, useParams } from "react-router-dom";
 import ItemDetail from '../ItemDetail/ItemDetail';
-import productsList from "../../utils/productsList";
-import productsFetch from "../../utils/productsFetch";
 
 
 function ItemDetailContainer () {
 
-    const {id} = useParams();
-    const [products, setProducts] = useState([]);
+    const itemId = useParams().id;
+    const [product, setProduct] = useState([]);
 
     useEffect(() => {
-        productsFetch(0, productsList)
-        .then((productsObt) => {setProducts(productsObt.find(producto => producto.id === parseInt(id)))})
+
+        const db = getFirestore();
+        const productDocument = doc(db, "products", itemId);
+        
+        getDoc(productDocument).then((snapshot) => {
+           if(snapshot) {
+                setProduct({id: snapshot.id, ...snapshot.data() });
+            }
+        })
+
     }, [])
 
 
     return (
     <>
-        <ItemDetail {...products} />
+        <ItemDetail {...product} />
     </>
     )
 }

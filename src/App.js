@@ -1,11 +1,14 @@
 import './App.css';
+import { initializeApp } from "firebase/app";
 import { BrowserRouter, Routes, Route, Link, useParams } from "react-router-dom";
 import {NavBar} from './components/NavBar/NavBar.jsx';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 import Cart from './components/Cart/Cart';
 import CartContextProvider from './components/CartContext/CartContext';
+import firebaseConfig from './utils/firebaseConfig';
 
+initializeApp(firebaseConfig);
 
 function App() {
 
