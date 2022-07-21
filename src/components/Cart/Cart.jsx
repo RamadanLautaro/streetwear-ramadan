@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter, Routes, Route, Link, useParams } from "react-router-dom";
 import { CartContext } from '../CartContext/CartContext';
 import CartItem  from '../CartItem/CartItem';
+import {OrderComponent} from '../Order/OrderComponent';
 import './CartStyle.css';
 
 
@@ -34,11 +35,14 @@ function Cart () {
                     <div className="row m-0 mt-3 mb-5 justify-content-center">
                         <div className="col-8">
                             <div className="row">
-                                <div className="col-6">
+                                <div className="col-4">
                                     <button className="btn btn-danger w-100" onClick={clear}>VACIAR CARRITO</button>
                                 </div>
-                                <div className="col-6">
-                                    <Link to="/" className="btn btn-primary w-100">SEGUIR COMPRANDO</Link>
+                                <div className="col-4">
+                                    <Link to="/" className="btn btn-secondary w-100">SEGUIR COMPRANDO</Link>
+                                </div>
+                                <div className="col-4">
+                                    <Link to="/order" className="btn btn-primary w-100">FINALIZAR COMPRA</Link>
                                 </div>
                             </div>
                         </div>

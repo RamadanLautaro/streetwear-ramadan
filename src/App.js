@@ -7,6 +7,7 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import Cart from './components/Cart/Cart';
 import CartContextProvider from './components/CartContext/CartContext';
 import firebaseConfig from './utils/firebaseConfig';
+import { OrderComponent } from './components/Order/OrderComponent';
 
 initializeApp(firebaseConfig);
 
@@ -22,6 +23,7 @@ function App() {
               <Route path="/category/:id" element={<ItemListContainer/>}/>
               <Route path="/item/:id" element={<ItemDetailContainer/>}/>
               <Route path="/cart" element={<Cart/>}/>
+              <Route path="/order" element={<OrderComponent/>}/>
           </Routes>
         </BrowserRouter>
       </CartContextProvider>

@@ -14,6 +14,7 @@ function ItemDetail (item) {
 
     const agregarAlCarrito = (e) => {
         e.preventDefault();
+        e.stopPropagation();
         addItem(item, unidades);
     }
 
