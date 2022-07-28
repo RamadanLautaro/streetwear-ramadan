@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {collection, getDocs, getDoc, getFirestore, query, where} from "firebase/firestore";
-import { BrowserRouter, Routes, Route, Link, useParams } from "react-router-dom";
-import "./ItemListContainerStyle.css";
+import {collection, getDocs, getFirestore, query, where} from "firebase/firestore";
+import { useParams } from "react-router-dom";
 import ItemList  from '../ItemList/ItemList';
+import GLOBALS from '../../utils/globals';
 
 
 function ItemListContainer () {
@@ -11,17 +11,14 @@ function ItemListContainer () {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
-
-    console.log("parametro:" + useParams().id)
-
     useEffect(() => {
 
         const db = getFirestore();
         const q = query(
-            collection(db, "products"),
-            categoryId != undefined ?
-            where ("category", "==", categoryId, "&&", "stock", ">", 0) :
-            where ("stock", ">", 0)
+            collection(db, GLOBALS.PRODUCTS_COLLECTION),
+            categoryId !== undefined ?
+            where ("category", "==", categoryId) :
+            where ("stock", ">=", 0)
         );
         
         getDocs(q).then((snapshot) => {
@@ -30,29 +27,28 @@ function ItemListContainer () {
                 setLoading(false);
             }
         })
-        // .catch((error) => alert(error))
-        // .finally(setLoading(false))
+        .catch((error) => alert(error))
         
     }, [categoryId])
 
 
     return (
         <>
-            <div className="row m-0 mt-5 mb-5 justify-content-center">
-                <div className="col-10">
+            {!loading && (
+                <div className='container my-5 px-5 px-md-4 px-lg-3'>
                     <div className="row">
                         <ItemList products={products}/>
                     </div>
-                    <div className={loading ? "mostrar" : "ocultar"}>
-                        <div className="row mt-5 justify-content-center">
-                            <div className="col-12 text__center">
-                                <div className="spinner-border text-primary" role="status"></div>
-                                <div className="text-primary" role="status">Cargando productos...</div>
-                            </div>
-                        </div>
+                </div>
+            )}
+            {loading && (
+                <div className="row mt-5 justify-content-center">
+                    <div className="col-12 text-center">
+                        <div className="spinner-border text-primary" role="status"></div>
+                        <div className="text-primary" role="status">Cargando productos...</div>
                     </div>
                 </div>
-            </div>
+            )}
         </>
     );
 };

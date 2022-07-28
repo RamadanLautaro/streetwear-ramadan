@@ -1,20 +1,31 @@
-import React, {useState} from 'react';
-import { BrowserRouter, Routes, Route, Link, useParams } from "react-router-dom";
+import React from 'react';
+import { Link, useNavigate } from "react-router-dom";
 import { CartWidget } from '../CartWidget/CartWidget.js';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 export const NavBar = () => {
 
+    let navigate = useNavigate();
+
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark pb-2" bg="dark" variant="dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-3" bg="dark" variant="dark">
             <div className="container-fluid">
                 <Link to="/" className="navbar-brand">
-                    <img src='/img/streetwear-logo.png' width={200}/>
+                    <img src='/img/streetwear-logo.png' alt="streetWEar" width={200}/>
                 </Link>
-                <div className="navbar-nav">
-                    <Link to="/category/camperas" className="nav-link pt-3 pb-3">CAMPERAS</Link>
-                    <Link to="/category/camisas" className="nav-link pt-3 pb-3">CAMISAS</Link>
-                    <Link to="/category/buzos" className="nav-link pt-3 pb-3">BUZOS</Link>
-                    <CartWidget width="40"/>
+                <div className="navbar-nav px-md-5">
+            
+                            <CartWidget width="40"/>
+
+                            <DropdownButton id="dropdown-basic-button" title="CATEGORÍAS">
+                                <Dropdown.Item onClick={() => {navigate("/")}}> TODOS </Dropdown.Item>
+                                <Dropdown.Item onClick={() => {navigate("/category/camperas")}}> CAMPERAS </Dropdown.Item>
+                                <Dropdown.Item onClick={() => {navigate("/category/camisas")}}> CAMISAS </Dropdown.Item>
+                                <Dropdown.Item onClick={() => {navigate("/category/buzos")}}> BUZOS </Dropdown.Item>
+                            </DropdownButton>
+       
+               
                 </div>
             </div>
         </nav>

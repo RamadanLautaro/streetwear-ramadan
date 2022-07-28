@@ -1,0 +1,8 @@
+.item__card {
+    transition: all 400ms ease;
+}
+
+.item__card:hover {
+    transition: all 400ms ease;
+    transform: scale(105%);
+}

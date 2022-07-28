@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { BrowserRouter, Routes, Route, Link, useParams } from "react-router-dom";
+import React, { useContext } from 'react';
+import { Link } from "react-router-dom";
 import { CartContext } from '../CartContext/CartContext';
 import CartItem  from '../CartItem/CartItem';
-import {OrderComponent} from '../Order/OrderComponent';
 import './CartStyle.css';
 
 

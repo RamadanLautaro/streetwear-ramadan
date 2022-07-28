@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, createContext } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 
 
 export const CartContext = createContext()
@@ -31,17 +31,20 @@ const CartContextProvider = ({children}) => {
 
     }, [cart])
 
-    const addItem = (item, quantity) => {
+    const addItem = (item, quantity, temporaryStock) => {
 
         if (isInCart(item.id)) {
             const itemInCart = cart.find(itemsInCart => itemsInCart.id === item.id)
             itemInCart.quantity = itemInCart.quantity + quantity;
             itemInCart.subtotalPrice = itemInCart.quantity * itemInCart.price;
+            itemInCart.temporaryStock = temporaryStock;
             setCart([...cart]);
+            return(itemInCart);
         }
         else {
-            const newItem = {...item, quantity, subtotalPrice: item.price * quantity};
+            const newItem = {...item, quantity, subtotalPrice: item.price * quantity, temporaryStock};
             setCart([...cart, newItem]);
+            return(newItem);
         }
     }
 
