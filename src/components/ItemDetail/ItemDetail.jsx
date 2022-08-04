@@ -16,10 +16,10 @@ function ItemDetail (item) {
 
     useEffect(() => {
 
-        const itemInCart = cart.find(x => x.id === id);
-        if(itemInCart) {
-            setTemporaryStock(itemInCart.stock - itemInCart.quantity);
-            setQuantityInCart(itemInCart.quantity);
+        const itemInCart = cart.filter(x => x.id === id);
+        if(itemInCart.length > 0) {
+            setTemporaryStock(itemInCart[0].stock - itemInCart[0].quantity);
+            setQuantityInCart(itemInCart[0].quantity);
         }
 
     }, [temporaryStock])
@@ -28,8 +28,9 @@ function ItemDetail (item) {
         e.preventDefault();
         e.stopPropagation();
         
-        const itemAdded = addItem(item, unidades, temporaryStock-unidades);
-        setTemporaryStock(stock - itemAdded.quantity);
+        const newCart = addItem(item, unidades, temporaryStock-unidades);
+        const itemAdded = newCart.filter(x => x.id === item.id)
+        setTemporaryStock(stock - itemAdded[0].quantity);
     }
 
     
