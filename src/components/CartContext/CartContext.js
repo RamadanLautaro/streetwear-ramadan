@@ -5,36 +5,21 @@ export const CartContext = createContext()
 
 const CartContextProvider = ({children}) => {
 
+    //ya no hace falta utilizar los estados CartTotalPrice y CartTotalQuantity
+    //ya no hace falta utilizar un useEfect innecesariamente
+
     const [cart, setCart] = useState([]);
-    const [cartTotalQuantity, setCartTotalQuantity] = useState(0);
-    const [cartTotalPrice, setCartTotalPrice] = useState(0); 
-
-    useEffect(() => {
-
-        if (cart.length > 0) {
-
-            var totalQuantity = 0;
-            var totalPrice = 0;
-
-            for (let i = 0; i < cart.length; i++) {
-                totalQuantity += (cart[i].quantity);
-                totalPrice += (cart[i].subtotalPrice);
-            }
-
-            setCartTotalQuantity(totalQuantity);
-            setCartTotalPrice(totalPrice);
-        }
-        else {
-            setCartTotalQuantity(0);
-            setCartTotalPrice(0);
-        }
-
-    }, [cart])
 
     const addItem = (item, quantity, temporaryStock) => {
 
         if (isInCart(item.id)) {
-            const itemInCart = cart.find(itemsInCart => itemsInCart.id === item.id)
+            //cambié el FIND por FILTER para respetar la inmutabilidad
+            //ahora tengo que especificar el indice 0 ya que find devolvia un objeto pero filter un array
+            //siempre va a ser indice 0 porque nunca van a haber dos items iguales en el carrito
+            //es decir que el filter siempre va a devolver un array de un único objeto
+            const itemsInCart = cart.filter(itemsInCart => itemsInCart.id === item.id)
+            const itemInCart = itemsInCart[0]
+
             itemInCart.quantity = itemInCart.quantity + quantity;
             itemInCart.subtotalPrice = itemInCart.quantity * itemInCart.price;
             itemInCart.temporaryStock = temporaryStock;
@@ -49,9 +34,11 @@ const CartContextProvider = ({children}) => {
     }
 
     const removeItem = (itemId) => {
-        const indexToDelete = cart.indexOf(cart.find(itemsInCart => itemsInCart.id === itemId));
-        const itemDeleted = cart.splice(indexToDelete, 1)
-        const itemsPreserved = cart.filter(itemsInCart => !itemDeleted.includes(itemsInCart));
+        //cambié el FIND y SPLICE por FILTER para respetar la inmutabilidad
+        //primero obtengo un array con el item a eliminar
+        //luego solo filtro el resto del carrito excluyendo el item a eliminar
+        const indemToDelete = cart.filter(itemsInCart => itemsInCart.id === itemId);
+        const itemsPreserved = cart.filter(itemsInCart => !indemToDelete.includes(itemsInCart));
         setCart(itemsPreserved);
     }
 
@@ -60,12 +47,15 @@ const CartContextProvider = ({children}) => {
     }
 
     const isInCart = (itemId) => {
-        return cart.find(itemsInCart => itemsInCart.id === itemId) ? true : false;
+        //cambié el FIND por FILTER para respetar la inmutabilidad
+        //ahora solo valido en base a la longitud del array devuelto
+        //es decir que si es mayor a 0 el item ya está en el carrito
+        return cart.filter(itemsInCart => itemsInCart.id === itemId).length > 0 ? true : false;
     }
 
 
     return(
-    <CartContext.Provider value={{cart, cartTotalQuantity, cartTotalPrice, addItem, removeItem, clear}}>
+    <CartContext.Provider value={{cart, addItem, removeItem, clear}}>
         {children}
     </CartContext.Provider>
     )

@@ -8,7 +8,7 @@ import GLOBALS from '../../utils/globals';
 
 export const OrderComponent = () => {
 
-    const {cart, clear, cartTotalQuantity, cartTotalPrice} = useContext(CartContext);
+    const {cart, clear} = useContext(CartContext);
 
     const [buyerName, setBuyerName] = useState('');
     const [buyerPhone, setBuyerPhone] = useState('');
@@ -19,9 +19,17 @@ export const OrderComponent = () => {
     const [orderId, setOrderId] = useState();
     const [orderSended, setOrderSended] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [cartTotalQuantity, setCartTotalQuantity] = useState(0);
+    const [cartTotalPrice, setCartTotalPrice] = useState(0); 
 
     useEffect(() => {
-
+        if (cart.length > 0) {
+            //ya no hace falta obtener el CartTotalQuantity y el CartTotalPrice innecesariamente desde el context
+            const totalQuantity = cart.map(item => item.quantity).reduce((prev, curr) => prev + curr, 0);
+            const totalPrice = cart.map(item => item.quantity * item.price).reduce((prev, curr) => prev + curr, 0);
+            setCartTotalQuantity(totalQuantity);
+            setCartTotalPrice(totalPrice);
+        }
     }, [orderSended])
 
     const buyerNameChange = (name) => {

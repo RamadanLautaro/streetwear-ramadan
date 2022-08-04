@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import { CartContext } from '../CartContext/CartContext';
 import CartItem  from '../CartItem/CartItem';
@@ -7,9 +7,22 @@ import './CartStyle.css';
 
 function Cart () {
 
-    const {cart, cartTotalQuantity, cartTotalPrice, clear} = useContext(CartContext);
+    const {cart, clear} = useContext(CartContext);
+    const [cartTotalQuantity, setCartTotalQuantity] = useState(0);
+    const [cartTotalPrice, setCartTotalPrice] = useState(0); 
 
+    useEffect(() => {
+        if (cart.length > 0) {
+            //cambié el FOR por MAP y REDUCE para respetar la inmutabilidad
+            //ya no hace falta obtener el CartTotalQuantity y el CartTotalPrice innecesariamente desde el context
+            const totalQuantity = cart.map(item => item.quantity).reduce((prev, curr) => prev + curr, 0);
+            const totalPrice = cart.map(item => item.quantity * item.price).reduce((prev, curr) => prev + curr, 0);
+            setCartTotalQuantity(totalQuantity);
+            setCartTotalPrice(totalPrice);
+        }
+    }, [cart])
 
+    
     return (
         <>
             {cart && cart.length > 0 && (
