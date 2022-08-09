@@ -16,21 +16,19 @@ function ItemDetail (item) {
 
     useEffect(() => {
 
-        const itemInCart = cart.filter(x => x.id === id);
+        const itemInCart = cart.filter(item => item.id === id);
         if(itemInCart.length > 0) {
             setTemporaryStock(itemInCart[0].stock - itemInCart[0].quantity);
             setQuantityInCart(itemInCart[0].quantity);
         }
 
-    }, [temporaryStock])
+    }, [temporaryStock, cart])
 
     const agregarAlCarrito = (e) => {
         e.preventDefault();
         e.stopPropagation();
         
-        const newCart = addItem(item, unidades, temporaryStock-unidades);
-        const itemAdded = newCart.filter(x => x.id === item.id)
-        setTemporaryStock(stock - itemAdded[0].quantity);
+        addItem(item, unidades, temporaryStock-unidades);
     }
 
     

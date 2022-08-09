@@ -7,19 +7,10 @@ import './CartStyle.css';
 
 function Cart () {
 
-    const {cart, clear} = useContext(CartContext);
-    const [cartTotalQuantity, setCartTotalQuantity] = useState(0);
-    const [cartTotalPrice, setCartTotalPrice] = useState(0); 
+    const {cart, clear, cartTotalQuantity, cartTotalPrice} = useContext(CartContext);
 
     useEffect(() => {
-        if (cart.length > 0) {
-            //cambié el FOR por MAP y REDUCE para respetar la inmutabilidad
-            //ya no hace falta obtener el CartTotalQuantity y el CartTotalPrice innecesariamente desde el context
-            const totalQuantity = cart.map(item => item.quantity).reduce((prev, curr) => prev + curr, 0);
-            const totalPrice = cart.map(item => item.quantity * item.price).reduce((prev, curr) => prev + curr, 0);
-            setCartTotalQuantity(totalQuantity);
-            setCartTotalPrice(totalPrice);
-        }
+
     }, [cart])
 
     
@@ -36,10 +27,10 @@ function Cart () {
                         <div className="col-8 bg-dark card shadow">
                             <div className="row p-3 justify-content-center">
                                 <div className="col-6 cart__details">
-                                    <span className="cart__totalQuantity">{cartTotalQuantity} UNIDADES</span>
+                                    <span className="cart__totalQuantity">{cartTotalQuantity()} UNIDADES</span>
                                 </div>
                                 <div className="col-6 cart__details">
-                                    <span className="cart__totalPrice">TOTAL: ${cartTotalPrice} </span>
+                                    <span className="cart__totalPrice">TOTAL: ${cartTotalPrice()} </span>
                                 </div>
                             </div>
                         </div>

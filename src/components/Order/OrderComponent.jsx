@@ -8,7 +8,7 @@ import GLOBALS from '../../utils/globals';
 
 export const OrderComponent = () => {
 
-    const {cart, clear} = useContext(CartContext);
+    const {cart, clear, cartTotalQuantity, cartTotalPrice} = useContext(CartContext);
 
     const [buyerName, setBuyerName] = useState('');
     const [buyerPhone, setBuyerPhone] = useState('');
@@ -19,18 +19,10 @@ export const OrderComponent = () => {
     const [orderId, setOrderId] = useState();
     const [orderSended, setOrderSended] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [cartTotalQuantity, setCartTotalQuantity] = useState(0);
-    const [cartTotalPrice, setCartTotalPrice] = useState(0); 
 
     useEffect(() => {
-        if (cart.length > 0) {
-            //ya no hace falta obtener el CartTotalQuantity y el CartTotalPrice innecesariamente desde el context
-            const totalQuantity = cart.map(item => item.quantity).reduce((prev, curr) => prev + curr, 0);
-            const totalPrice = cart.map(item => item.quantity * item.price).reduce((prev, curr) => prev + curr, 0);
-            setCartTotalQuantity(totalQuantity);
-            setCartTotalPrice(totalPrice);
-        }
-    }, [orderSended])
+
+    }, [orderSended, cart])
 
     const buyerNameChange = (name) => {
         if (name.length >= 5)
@@ -125,11 +117,11 @@ export const OrderComponent = () => {
                         <div className='row card-body m-3'>
                             <div className='col-12 card shadow'>
                                 <h1 className='m-0 mx-2 mt-2 text-primary fs-2 fw-light'>UNIDADES TOTALES</h1>                        
-                                <div className='text-danger text-end fs-1 fw-bold px-3'>{cartTotalQuantity}</div>
+                                <div className='text-danger text-end fs-1 fw-bold px-3'>{cartTotalQuantity()}</div>
                             </div>
                             <div className='col-12 mt-3 card shadow'>
                                 <h1 className='m-0 mx-2 mt-2 text-primary fs-2 fw-light'>PRECIO FINAL</h1>
-                                <div className='text-danger text-end fs-1 fw-bold px-3'>${cartTotalPrice}</div>
+                                <div className='text-danger text-end fs-1 fw-bold px-3'>${cartTotalPrice()}</div>
                             </div>
                         </div>
                         <div className='row py-4 card-footer'>
